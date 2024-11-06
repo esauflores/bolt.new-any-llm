@@ -7,7 +7,7 @@ import { Menu } from '~/components/sidebar/Menu.client';
 import { IconButton } from '~/components/ui/IconButton';
 import { Workbench } from '~/components/workbench/Workbench.client';
 import { classNames } from '~/utils/classNames';
-import { MODEL_LIST, DEFAULT_PROVIDER } from '~/utils/constants';
+import { MODEL_LIST, DEFAULT_PROVIDER, DEFAULT_MODEL } from '~/utils/constants';
 import { Messages } from './Messages.client';
 import { SendButton } from './SendButton.client';
 import { useState } from 'react';
@@ -24,8 +24,9 @@ const EXAMPLE_PROMPTS = [
 
 const providerList = [...new Set(MODEL_LIST.map((model) => model.provider))]
 
-const ModelSelector = ({ model, setModel, modelList, providerList }) => {
+const ModelSelector = ({ model, setModel, modelList, providerList, defaultModel }) => {
   const [provider, setProvider] = useState(DEFAULT_PROVIDER);
+
   return (
     <div className="mb-2">
       <select
@@ -158,6 +159,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   setModel={setModel}
                   modelList={MODEL_LIST}
                   providerList={providerList}
+                  defaultModel={DEFAULT_MODEL}
                 />
                 <div
                   className={classNames(
